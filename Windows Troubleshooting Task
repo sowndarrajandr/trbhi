@@ -1,0 +1,11 @@
+Windows Troubleshooting task:
+
+Opened site in IE and got HTTP/503
+Opened IIS manager and checked the config config looks good.
+Checked the App pool which is stopped.
+Started app pool multiple times and it crashed right back 
+Checked Event Viewer\Windows\System Logs it shown that the username password is wrong for the App Pool.
+Reset the Password for the local user used in the App Pool and updated the password.
+Started App pool and the Application is up.
+
+

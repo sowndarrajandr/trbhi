@@ -1,0 +1,20 @@
+Linux Troubleshooting task:
+Check systemctl status redis | journalctl -xe
+Error as below,
+-- Unit redis-server.service has begun starting up.
+Apr 29 13:22:10 sdj-lnx0 run-parts[4263]: run-parts: executing /etc/redis/redis-server.pre-up.d/00_example
+Apr 29 13:22:10 sdj-lnx0 redis-server[4279]: *** FATAL CONFIG FILE ERROR ***
+Apr 29 13:22:10 sdj-lnx0 redis-server[4279]: Reading the configuration file, at line 108
+Apr 29 13:22:10 sdj-lnx0 redis-server[4279]: >>> 'logfile /var/log/redis-server.log'
+Apr 29 13:22:10 sdj-lnx0 redis-server[4279]: Can't open the log file: Read-only file system
+Apr 29 13:22:10 sdj-lnx0 systemd[1]: redis-server.service: Control process exited, code=exited status=1
+Apr 29 13:22:10 sdj-lnx0 systemd[1]: Failed to start Advanced key-value store.
+-- Subject: Unit redis-server.service has failed
+-- Defined-By: systemd
+-- Support: http://lists.freedesktop.org/mailman/listinfo/systemd-devel
+-- 
+-- Unit redis-server.service has failed.
+
+Figured some issue with writing log files checked the path and the path in config file and they differ so, changed the config path to /var/log/redis/redis-server.log 
+Started service with systemctl start redis and it worked.
+
